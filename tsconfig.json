@@ -18,7 +18,8 @@
     "noImplicitAny": true,
     "target": "es2019",
     "jsx": "react-jsx",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+     "baseUrl": "src"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
