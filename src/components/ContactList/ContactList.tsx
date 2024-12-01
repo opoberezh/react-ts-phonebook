@@ -7,7 +7,20 @@ const icon = {
     reset: <ImLoop2/>
 };
 
-export const ContactList = ({
+type Contacts = {
+  id: string;
+  name: string;
+  number: string;
+};
+
+type ContactsListProp = {
+  contacts: Contacts[];
+  contactFilter: string;
+  onChangeFilter: (value: string) => void;
+  onDeleteContact: (id: string) => void;
+  onReset: () => void;
+}
+export const ContactList: React.FC<ContactsListProp> = ({
   contacts,
   contactFilter,
   onChangeFilter,
@@ -20,18 +33,18 @@ export const ContactList = ({
 
   return (
     <Wrapper>
-      
+
       <ContactsFilter value={contactFilter} onChange={onChangeFilter} />
-      
-      <ListStyled>
-        {filteredContacts.map(contact => (
+
+     {filteredContacts.length > 0 ? (<ListStyled>
+         {filteredContacts.map(contact => (
           <ItemStyled key={contact.id}>
             {contact.name}: {contact.number}
             <DeleteButton onClick={() => onDeleteContact(contact.id)}>{icon.minusUser} Delete</DeleteButton>
           </ItemStyled>
-         
+
         ))}
-      </ListStyled>
+      </ListStyled>):( <p>No contacts found</p>)}
       <ResetBtn onClick={onReset}>{icon.reset}Reset</ResetBtn>
     </Wrapper>
   );

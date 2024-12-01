@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {Form, Field, } from 'formik';
 
-export const Styleform = styled(Form)`
+export const StyleForm = styled(Form)`
 
 width: 100%
 
@@ -18,7 +18,7 @@ text-shadow: 3px 3px 3px rgba(0,0,0,0.55);
 
 export const StyledField = styled(Field)`
 margin: auto;
-padding: 4px; 
+padding: 4px;
 width: 100%;
 border: 2px solid #A9A9A9;
 border-radius: 4px;
@@ -57,11 +57,11 @@ export const SubmitBtn = styled.button`
   min-width: 100px;
   height: 30px;
   margin: 15px 0 0 0;
- 
+
   padding: 5px;
-  
+
   border-radius: 5px;
-  
+
   border: 2px solid #A9A9A9;
   box-shadow: 6px 6px 6px 0px rgba(0,0,0,0.55);
   cursor: pointer;

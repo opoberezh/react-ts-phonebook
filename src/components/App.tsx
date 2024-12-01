@@ -14,15 +14,21 @@ import { useEffect, useState } from "react";
 
 const localStorageKey = 'contacts';
 
-export const App = () => {
- const [contacts, setContacts] = useState (() => {
+type Contact = {
+  name: string;
+  number: string;
+  id: string;
+};
+
+export const App: React.FC = () => {
+ const [contacts, setContacts] = useState<Contact[]>(() => {
   const savedContacts = localStorage.getItem(localStorageKey);
   if(savedContacts !== null){
-    return JSON.parse(savedContacts);
+    return JSON.parse(savedContacts) as Contact[];
   }
   return initialContacts;
  });
-const [contactFilter, setContactFilter] = useState('');
+const [contactFilter, setContactFilter] = useState<string>('');
 
 
 
@@ -33,11 +39,11 @@ useEffect(() => {
 
 
 
-const addContact = newContact => {
+const addContact = (newContact: Omit<Contact, "id">) => {
   const existingContact = contacts.find(
     contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
   );
-  
+
   if (existingContact) {
     toast.info(`${newContact.name} is already in contacts.`, {
       position: "top-right",
@@ -55,21 +61,20 @@ const addContact = newContact => {
 
 const resetChanges = () =>{
   setContacts(initialContacts);
- 
+
 };
 
 
-const changeContactFilter = newFilter => {
+const changeContactFilter = (newFilter: string) => {
   setContactFilter(newFilter);
 };
- 
+
 const visibleContactItems = contacts.filter(contact =>
 contact.name.toLowerCase().includes(contactFilter.toLowerCase())
 );
 
-  
-const deleteContact = contactId => {
-  console.log(contactId)
+
+const deleteContact = (contactId: string) => {
 setContacts(prevState => prevState.filter(contact => contact.id !== contactId),
 );
 };
